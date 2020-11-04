@@ -89,7 +89,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `db_teamproject`.`subject_eval`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_teamproject`.`subject_eval` (
-  `eval_id` VARCHAR(45) NOT NULL,
+  `eval_id` INT auto_increment NOT NULL,
   `subject_id` VARCHAR(100) NOT NULL,
   `term` VARCHAR(10) NOT NULL,
   `subject_eval` VARCHAR(2000) NOT NULL,
@@ -115,7 +115,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `db_teamproject`.`prerequisite`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_teamproject`.`prerequisite` (
-  `prerequisite_id` VARCHAR(20) NOT NULL,
+  `prerequisite_id` INT auto_increment NULL,
   `subject_name` VARCHAR(50) NOT NULL,
   `pre_subject_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`prerequisite_id`))
@@ -128,7 +128,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `db_teamproject`.`score`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_teamproject`.`score` (
-  `score_id` VARCHAR(20) NOT NULL,
+  `score_id` INT auto_increment NOT NULL,
   `student_id` VARCHAR(12) NOT NULL,
   `term` VARCHAR(10) NULL,
   `grade` INT NULL,
@@ -140,7 +140,7 @@ ENGINE = InnoDB;
 -- Table `db_teamproject`.`attend`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_teamproject`.`attend` (
-  `attend_id` INT NOT NULL,
+  `attend_id` INT auto_increment NOT NULL,
   `student_id` VARCHAR(12) NOT NULL,
   `subject_id` VARCHAR(10) NOT NULL,
   `term` VARCHAR(10) NULL,
@@ -167,7 +167,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_teamproject`.`announce` (
   `subject_id` VARCHAR(20) NOT NULL,
-  `announce_id` VARCHAR(10) NOT NULL,
+  `announce_id` INT auto_increment NOT NULL,
   `announce_title` VARCHAR(20) NOT NULL,
   `announce_content` VARCHAR(500) NOT NULL,
   `announce_writer` VARCHAR(20) NULL,
@@ -186,7 +186,7 @@ ENGINE = InnoDB;
 -- Table `db_teamproject`.`friend`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_teamproject`.`friend` (
-  `friend_id` VARCHAR(12) NOT NULL,
+  `friend_id` INT auto_increment NOT NULL,
   `student_id` VARCHAR(12) NOT NULL,
   PRIMARY KEY (`friend_id`, `student_id`),
   INDEX `fk_friend_student1_idx` (`student_id` ASC) VISIBLE,
