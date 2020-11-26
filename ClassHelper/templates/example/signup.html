@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World Template</title>
+</head>
+<body>
+    <form method="POST" action="{%url 'signup'%}">
+        {% csrf_token %}
+        아이디: <br><input name="username" type="text"><br>
+        비밀번호: <br><input name="password" type="password"><br>
+        비밀번호 확인: <br><input name="password_verify" type="password"> <br>
+        <input type="submit" value="로그인">
+    </form>
+</body>
+</html>
