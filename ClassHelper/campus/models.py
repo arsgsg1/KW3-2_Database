@@ -73,3 +73,7 @@ class SubjectPrerequisite(models.Model):
     class Meta:
         managed = False
         db_table = 'subject_prerequisite'
+
+
+class n_subject(models.Model):
+    subject_id = models.CharField(max_length=100)
