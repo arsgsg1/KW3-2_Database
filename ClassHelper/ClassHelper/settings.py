@@ -91,12 +91,12 @@ WSGI_APPLICATION = 'ClassHelper.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': GetSecret("DATABASE_NAME"),
         'USER': GetSecret("DATABASE_USER"),
         'PASSWORD': GetSecret("DATABASE_PASSWORD"),
         'HOST': 'localhost',
-        'PORT': '3306'
+        'PORT': '3306',
     }
 }
 
@@ -143,6 +143,6 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/campus/'
 
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/common/login'

@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("안녕하세요. Campus입니다.");
+    cur_user = request.user
+    if cur_user.is_authenticated:
+        return render(request, "campus/index.html")
+    else:
+        return redirect('/common/login')
