@@ -1,18 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
 <title>Klass Helper</title>
+
+
 <div class="container my-3">
     <div class="row my-3">
         <div class="col-4">
-            <h4>메인 페이지</h4>
+            <h4>수강 내역</h4>
         </div>
     </div>
+
     {% for subject in subject_list %}
-    <h2>
-        {% for item in subject %}
-            <a>{{item}}</a>
-        {% endfor %}
-    </h2>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header id" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    {{subject.subject_id}},
+                        {{subject.subject_name}},
+                        {{subject.day1}}
+                        {{subject.time1}},
+                        {{subject.day2}}
+                        {{subject.time2}}
+                    </button>
+                </h5>
+            </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    {% for subject_id, qs in announce_list.items %}
+                        {% if subject.subject_id == subject_id%}
+                            <div class="list-group"></div>
+                            {% for announce in qs%}
+                                <a class="list-group-item list-group-item-action"> {{announce.announce_title}}</a>
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+        </div>
+    </div>
+
     {% endfor %}
 </div>
 {% endblock %}
