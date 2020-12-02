@@ -22,7 +22,6 @@ def index(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('example/', include('example.urls')),
     path('common/', include('common.urls')),
     path('', index, name='index'),
     path('campus/', include('campus.urls')),

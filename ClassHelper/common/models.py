@@ -3,6 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class CustomUser(AbstractUser):
-    term = models.CharField(max_length=25)
-    division = models.CharField(max_length=25)
-    phone_number = models.CharField(max_length=25)
+    term = models.CharField(max_length=25, null=True)
+    division = models.CharField(max_length=25, null=True)
+    phone_number = models.CharField(max_length=25, null=True)

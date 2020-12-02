@@ -14,9 +14,7 @@ def index(request):
         announce_list = {}
         for subject in subjects:
             subject_id = subject.subject_id
-            announce_list = {
-                subject_id: Announce.objects.filter(subject_id=subject_id).values()
-            }
+            announce_list[subject_id] = Announce.objects.filter(subject_id=subject_id).values()
 
         data = {
             'subject_list': subjects,
@@ -37,8 +35,6 @@ def subject_apply(request):
         if form.is_valid():
             subject_id = form.cleaned_data['subject_id']
             StudentGrade.objects.create(student_id=cur_user.username, subject_id=subject_id, term=cur_user.term)
-            sql = "insert into student_grade(student_id, subject_id, term) select 2015722083, subject_id, term from subject where subject_id={} and term='2020-2';".format(subject_id)
-            Subject.objects.raw(sql)
         return redirect('/')
 
     return render(request, 'campus/subject_apply.html')
