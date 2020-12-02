@@ -20,7 +20,9 @@ def index(request):
 
         data = {
             'subject_list': subjects,
-            'announce_list' : announce_list
+            'announce_list' : announce_list,
+            'friend_list' : get_friend_list(),
+            'friend_subject_list' : get_friend_subject_list()
         }
         return render(request, "campus/main.html", data)
     else:
@@ -38,6 +40,29 @@ def subject_apply(request):
 
     return render(request, 'campus/subject_apply.html')
 
+
+def get_friend_list(self=0):
+    with connection.cursor() as cursor:
+        sql = """select student.name from student where student_id in (
+            select distinct gra.student_id
+            from (subject as sub join student_grade as gra on sub.subject_id=gra.subject_id) where gra.term='2020-2' and sub.term='2020-2' and gra.student_id in (select A.friend_id from friend as A join friend as B where A.student_id=B.friend_id and B.student_id=A.friend_id and A.student_id='2015722052'));
+            """
+        cursor.execute(sql)
+        row = cursor.fetchone()
+    return row
+
+
+def get_friend_subject_list(self=0):
+    with connection.cursor() as cursor:
+        sql = """select sub.subject_id, subject_name, professor_name, class_hours, day1, time1, day2, time2, day3, time3
+            from (subject as sub join student_grade as gra on sub.subject_id=gra.subject_id) where gra.term='2020-2' and sub.term='2020-2' and gra.student_id in (select A.friend_id from friend as A join friend as B where A.student_id=B.friend_id and B.student_id=A.friend_id and A.student_id='2015722052');
+            """
+        cursor.execute(sql)
+        row = cursor.fetchone()
+    result = ''
+    for item in row:
+        result = result + str(item) + ' '
+    return result
 
 def get_avg_score(self=0):
     with connection.cursor() as cursor:

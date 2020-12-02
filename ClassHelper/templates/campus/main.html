@@ -32,10 +32,11 @@
                   <div class="card-body">
                     {% for subject_id, qs in announce_list.items %}
                         {% if subject.subject_id == subject_id%}
-                            <div class="list-group"></div>
-                            {% for announce in qs%}
+                            <div class="list-group">
+                                {% for announce in qs%}
                                 <a class="list-group-item list-group-item-action"> {{announce.announce_title}}</a>
-                            {% endfor %}
+                                {% endfor %}
+                            </div>
                         {% else %}
                         {% endif %}
                     {% endfor %}
@@ -43,7 +44,24 @@
                 </div>
         </div>
     </div>
-
     {% endfor %}
+    <div class="row my-3">
+        <div class="col-12">
+            <h4>친구목록</h4>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for friend in friend_list %}
+                        <a class="list-group-item list-group-item-action">{{friend}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <h4>친구가 수강하는 과목</h4>
+            <div class="card-body">
+                <div class="list-group"></div>
+                <a class="list-group-item list-group-item-action">{{friend_subject_list}}</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
