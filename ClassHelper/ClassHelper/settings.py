@@ -19,7 +19,6 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-print(os.path.join(BASE_DIR, "secret.json"))
 with open(os.path.join(BASE_DIR, "secret.json")) as f:
     secrets = json.loads(f.read())
 

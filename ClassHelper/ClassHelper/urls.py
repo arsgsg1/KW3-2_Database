@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+
+def index(request):
+    return redirect('campus/')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('example/', include('example.urls')),
     path('common/', include('common.urls')),
-    path('/', include('campus.urls')),
+    path('', index, name='index'),
     path('campus/', include('campus.urls')),
 ]

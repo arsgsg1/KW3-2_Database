@@ -1,24 +1,14 @@
 from django.shortcuts import render, redirect
-import pymysql as pm
 from .forms import apply_form
 from .models import Announce, Subject, SubjectEval
-from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
     cur_user = request.user
     if cur_user.is_authenticated:
         student_id = request.user.username
-        # select
-        #conn = pm.connect(host='localhost', user='django_admin', password='s852130', db='registration', charset='utf8')
-        #curs = conn.cursor()
         sql = "select sub.subject_id, subject_name, professor_name, class_hours, day1, time1, day2, time2, day3, time3 from subject as sub join student_grade as gra on sub.subject_id=gra.subject_id where gra.student_id={} and gra.term='2020-2' and sub.term='2020-2'".format(student_id)
         subjects = Subject.objects.raw(sql)
-
-        #sql = "select sub.subject_id, subject_name, professor_name, class_hours, day1, time1, day2, time2, day3, time3 from subject as sub join student_grade as gra on sub.subject_id=gra.subject_id where gra.student_id=%s and gra.term='2020-2' and sub.term='2020-2'"
-        #curs.execute(sql, (student_id))
-        #subjects = curs.fetchall()
-        #conn.close()
 
         announce_list = {}
         for subject in subjects:
