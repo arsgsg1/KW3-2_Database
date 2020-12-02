@@ -1,4 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-강의평가 페이지
+<div class="container my-3">
+    <a class="card-header">
+        강의평가: {{subject_name}}
+    </a>
+    <div class="list-group">
+        {% for eval in evals %}
+            <div class="card-body">
+                <a class="list-group-item-action">
+                    {{eval.term}} 학기 수강자
+                    강의평 : {{eval.eval_content}}
+                </a>
+                <h5>
+                    평점 : {{eval.eval_grade}}
+                </h5>
+            </div>
+        {% endfor %}
+        <div class="card-body">
+            z-core: {{z_score}}
+        </div>
+    </div>
+</div>
 {% endblock %}

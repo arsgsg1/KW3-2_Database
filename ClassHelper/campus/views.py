@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import apply_form
 from .models import Announce, Subject, SubjectEval
+from django.db import connection
 
 # Create your views here.
 def index(request):
@@ -32,19 +33,35 @@ def subject_apply(request):
         form = apply_form(request.POST)
         if form.is_valid():
             subject_id = form.cleaned_data['subject_id']
-            conn = pm.connect(host='localhost', user='django_admin', password='s852130', db='registration', charset='utf8')
-            curs = conn.cursor()
-            sql = "insert into student_grade(student_id, subject_id, term) select 2015722083, subject_id, term from subject where subject_id=%s and term='2020-2';"
-            curs.execute(sql, (subject_id))
-            conn.commit()
-            conn.close()
+            sql = "insert into student_grade(student_id, subject_id, term) select 2015722083, subject_id, term from subject where subject_id={} and term='2020-2';".format(subject_id)
+            Subject.objects.raw(sql)
+
     return render(request, 'campus/subject_apply.html')
 
 
-def subject_eval(request, subject_id):
-    print(subject_id)
+def get_avg_score(self=0):
+    with connection.cursor() as cursor:
+        sql = """with
+            eval_avg(average) as (select avg(eval_grade) from subject_eval),
+            eval_std(derivation) as (select stddev(eval_grade) from subject_eval)
+            select avg(truncate(((eval_grade-average)/ derivation),2)) as z_score from subject_eval , eval_avg, eval_std
+             where subject_id='H020-1-8297-02' and term='2020-2' group by subject_id, term;
+            """
+        cursor.execute(sql)
+        row = cursor.fetchone()
+    return row
 
-    return render(request, 'campus/subject_eval.html')
+def subject_eval(request, subject_id):
+    #강의 평가
+    evals = SubjectEval.objects.filter(subject_id=subject_id).values()
+    subject_name = Subject.objects.filter(subject_id=subject_id).first().subject_name
+    z_score = get_avg_score()[0]
+    context = {
+        'evals' : evals,
+        'subject_name' : subject_name,
+        'z_score' : z_score
+    }
+    return render(request, 'campus/subject_eval.html', context)
 
 
 def test1(request):
