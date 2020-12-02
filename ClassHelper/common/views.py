@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from .forms import UserForm
+from .forms import *
 
 
 def index(request):
@@ -23,3 +23,19 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
+
+
+def update(request):
+    return render(request, 'common/user_update.html')
+
+
+def lookup(request):
+    cur_user = request.user
+    if cur_user.is_authenticated:
+        userinfo = CustomUser.objects.filter(username=cur_user.username).values()
+        print(userinfo)
+        context = {
+            'userinfo' : userinfo
+        }
+        return render(request, 'common/lookup.html', context)
+    return redirect('common/login.html')

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import pymysql as pm
 from .forms import apply_form
-from .models import Announce, Subject
+from .models import Announce, Subject, SubjectEval
 from django.http import HttpResponse
 
 # Create your views here.
@@ -49,6 +49,12 @@ def subject_apply(request):
             conn.commit()
             conn.close()
     return render(request, 'campus/subject_apply.html')
+
+
+def subject_eval(request, subject_id):
+    print(subject_id)
+
+    return render(request, 'campus/subject_eval.html')
 
 
 def test1(request):

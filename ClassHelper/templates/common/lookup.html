@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<title>개인정보 조회</title>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-4">
+            <h4>개인정보 조회</h4>
+        </div>
+    </div>
+    <div class="list-group"></div>
+    {% for info in userinfo %}
+    <a class="list-group-item list-group-item-action"> 이름 : {{info.username}}</a>
+    <a class="list-group-item list-group-item-action"> 이메일 : {{info.email}}</a>
+    <a class="list-group-item list-group-item-action"> 학적사항 : {{info.division}}</a>
+    <a class="list-group-item list-group-item-action"> 전화번호 : {{info.phone_number}}</a>
+    {% endfor %}
+</div>
+{% endblock %}

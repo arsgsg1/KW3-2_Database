@@ -63,9 +63,12 @@ class Subject(models.Model):
         return self.subject_id
 
 class SubjectEval(models.Model):
-    subject_id = models.ForeignKey(Subject, models.DO_NOTHING, related_name='subejcteval')
+    idx = models.AutoField(db_column='idx', primary_key=True)
+    subject = models.ForeignKey(Subject, models.DO_NOTHING, related_name='subejcteval')
     term = models.CharField(max_length=10)
-    subject_eval = models.CharField(max_length=2000)
+    eval_content = models.CharField(max_length=1000)
+    eval_grade = models.DecimalField(max_digits=5, decimal_places=2)
+
 
     class Meta:
         managed = False

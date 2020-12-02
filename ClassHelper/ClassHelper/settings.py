@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'campus.apps.CampusConfig',
 ]
 
+AUTH_USER_MODEL = 'common.CustomUser'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

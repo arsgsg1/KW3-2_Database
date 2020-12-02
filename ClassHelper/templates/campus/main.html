@@ -15,14 +15,17 @@
         <div class="card">
             <div class="card-header id" id="headingOne">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    {{subject.subject_id}},
+                    <button class="btn btn-info" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        {{subject.subject_id}},
                         {{subject.subject_name}},
                         {{subject.day1}}
                         {{subject.time1}},
                         {{subject.day2}}
                         {{subject.time2}}
                     </button>
+                </h5>
+                <h5 class="my-3">
+                    <a href="{% url 'campus:subject_eval' subject.subject_id %}">강의평가</a>
                 </h5>
             </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
