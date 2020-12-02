@@ -89,5 +89,8 @@ def subject_eval(request, subject_id):
     return render(request, 'campus/subject_eval.html', context)
 
 
+def grade(request):
+    return render(request, 'campus/grade.html')
+
 def test1(request):
     return render(request, 'campus/index.html')

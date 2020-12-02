@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="row-cols-2">내 성적 조회</h2>
+    <div class="card" style="width: 40rem;">
+        <img class="card-img-top" src="/static/grade_table.png" alt="전공">
+        <div class="card-body">
+            <p class="card-text" style="text-align: center">전공/교양 학점</p>
+        </div>
+    </div>
+
+    <div class="card" style="width: 40rem;">
+        <img class="card-img-top" src="/static/score.png" alt="전공">
+        <div class="card-body">
+            <p class="card-text" style="text-align: center">전체 학점</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
