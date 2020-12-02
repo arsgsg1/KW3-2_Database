@@ -11,8 +11,8 @@ def eval_graph(subject_id):
     conn = pymysql.connect(
         host='127.0.0.1',
         port=3306,
-        user='root',
-        passwd='3721',
+        user='django_admin',
+        passwd='s852130',
         db='registration',
         charset='utf8')
 
@@ -35,7 +35,7 @@ def eval_graph(subject_id):
         else:
             verybad+=1
 
-    ratio = [verygood/len(result), good/len(result), soso/len(result), bad/len(result), verybad/len(result)]    
+    ratio = [verygood/len(result), good/len(result), soso/len(result), bad/len(result), verybad/len(result)]
 
     labels = ['Very good', 'Good', 'SoSo', 'Bad', 'Very Bad']
 

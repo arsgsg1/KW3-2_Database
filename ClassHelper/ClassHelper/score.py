@@ -12,14 +12,14 @@ def score_graph(student_id):
     conn = pymysql.connect(
         host='127.0.0.1',
         port=3306,
-        user='root',
-        passwd='3721',
+        user='django_admin',
+        passwd='s852130',
         db='registration',
         charset='utf8')
 
     curs = conn.cursor()
-    sql = "SELECT student_id, term, credit_hour, grade_average, major_grade_average, electives_grade_average FROM score where student_id = %s order by term"
-    curs.execute(sql,(student_id,))
+    sql = "SELECT student_id, term, credit_hour, grade_average, major_grade_average, electives_grade_average FROM score where student_id = 2015722052 order by term"
+    curs.execute(sql)
 
     result = curs.fetchall()
     df_all=pd.DataFrame(result, columns=["Student_id", "Term", "Credit_hour", "Avg_grade", "Major Avg_grade", "Elec Avg_grade"])
@@ -27,7 +27,6 @@ def score_graph(student_id):
     df_image = df_all.loc[:, ['Term', 'Credit_hour', 'Avg_grade', 'Major Avg_grade', 'Elec Avg_grade']]
     # 다른 방법
     # df_sample = data[['성별코드', '신장(5Cm단위)', '체중(5Kg 단위)', '허리둘레', '흡연상태', '음주여부']]
-    display(df_image)
     dfi.export(df_image, './static/grade_table.png')
 
     sql = "select round(avg(grade_average),2) from score group by term"
@@ -93,4 +92,6 @@ def score_graph(student_id):
     plt.legend(loc='best') # 범례
 
     #plt.show()
+    import os
+    print("dir: ", os.getcwd())
     plt.savefig('./static/score.png') # 이미지 png로 저장

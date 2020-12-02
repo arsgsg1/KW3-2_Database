@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os, json
 from django.core.exceptions import ImproperlyConfigured
 from pathlib import Path
+from .score import score_graph
+from .eval import eval_graph
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -147,3 +150,6 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/campus/'
 
 LOGOUT_REDIRECT_URL = '/common/login'
+
+score_graph(2015722052)
+eval_graph('H020-1-8297-02')
