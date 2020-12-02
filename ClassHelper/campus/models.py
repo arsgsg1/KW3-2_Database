@@ -87,6 +87,9 @@ class SubjectPrerequisite(models.Model):
 class n_subject(models.Model):
     subject_id = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.subject_id
+
 
 class Announce(models.Model):
     announce_id = models.AutoField(db_column='announce_id',primary_key=True)

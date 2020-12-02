@@ -33,6 +33,11 @@
                    value="{{ form.email.value|default_if_none:'' }}">
         </div>
         <div class="form-group">
+            <label for="term">학기</label>
+            <input type="text" class="form-control" name="term" id="term"
+                   value="{{ form.term.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
             <label for="division">분반</label>
             <input type="text" class="form-control" name="division" id="division"
                    value="{{ form.division.value|default_if_none:'' }}">

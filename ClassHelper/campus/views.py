@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import apply_form
-from .models import Announce, Subject, SubjectEval
+from .models import Announce, Subject, SubjectEval, StudentGrade
 from django.db import connection
 
 # Create your views here.
@@ -32,11 +32,14 @@ def index(request):
 def subject_apply(request):
     if request.method == "POST":
         #insert
+        cur_user = request.user
         form = apply_form(request.POST)
         if form.is_valid():
             subject_id = form.cleaned_data['subject_id']
+            StudentGrade.objects.create(student_id=cur_user.username, subject_id=subject_id, term=cur_user.term)
             sql = "insert into student_grade(student_id, subject_id, term) select 2015722083, subject_id, term from subject where subject_id={} and term='2020-2';".format(subject_id)
             Subject.objects.raw(sql)
+        return redirect('/')
 
     return render(request, 'campus/subject_apply.html')
 
@@ -91,6 +94,3 @@ def subject_eval(request, subject_id):
 
 def grade(request):
     return render(request, 'campus/grade.html')
-
-def test1(request):
-    return render(request, 'campus/index.html')

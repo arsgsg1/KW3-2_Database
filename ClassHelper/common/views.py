@@ -8,9 +8,7 @@ def index(request):
 
 
 def signup(request):
-    """
-    계정생성
-    """
+    #계정 생성
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
